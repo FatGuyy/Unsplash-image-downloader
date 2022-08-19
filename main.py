@@ -7,6 +7,7 @@ import os
 #---------------------------------------------
 
 searchs = ['minecraft', 'ghost', 'hero']
+amount = int(input('Enter the amount of photos you want to download per topic'))
 
 #---------------------------------------------
 
@@ -26,9 +27,9 @@ def download(down_url, i, dir_name):
 
 #iterating the searchs and scrapping the reccieved data
 for search in searchs:
-    url = f'https://api.unsplash.com/search/photos?client_id={Api_Key.key}&per_page=11&query={search}'
+    url = f'https://api.unsplash.com/search/photos?client_id={Api_Key.key}&per_page={amount}&query={search}'
     response = requests.get(url)
     #file_url = (list(list(list(list(res.json().items())[2][1])[0].values())[10].values())[0])
-    for i in range(11):
+    for i in range(amount):
         file_url = (list(list(list(list(response.json().items())[2][1])[i].values())[10].values())[0])  #Link to download
         download(file_url, i, search)
